@@ -1,6 +1,6 @@
 {
   "name": "check-props",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Check the existence and types of object properties.",
   "main": "index.js",
   "scripts": {
