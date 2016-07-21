@@ -2,23 +2,25 @@
 
 /**
  * checks if `key` exists in `object` and is of `type`
- * @param  {string} key   	- the property to check
- * @param  {string} type    - the type the property is expected to be
  * @param  {object} object  - the object to check for said property
+ * @param  {string} key   	- the property to check
+ * @param  {string} [type]  - (optional) the type the property is expected to be
  * @return {boolean}        - whether the property meets the above or not
  */
-function checkKey(key, type, object) {
-	return object.hasOwnProperty(key) && typeof object[key] === type;
+function checkKey(object, key, type) {
+	const hasKey = object.hasOwnProperty(key);
+	let keyIsType = type ? typeof object[key] === type : true; // return true if type is not given
+	return hasKey && keyIsType;
 }
 
 /**
  * checks if keys specified in `props` exist in `object`
- * also checks if the values of props[key] are the type of the prop in object
- * an example of a props object is { foo: 'string' }
+ * also checks if the values of props[key] are the type of the prop in object if props[key] is not null
+ * an example of a props object is { foo: 'string', bar: null }
  */
-function checkProps(props, object) {
+function checkProps(object, props) {
 	const keys = Object.keys(props);
-	return keys.every(key => checkKey(key, props[key], object));
+	return keys.every(key => checkKey(object, key, props[key]));
 }
 
 const check = {
