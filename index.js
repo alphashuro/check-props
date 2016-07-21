@@ -25,9 +25,29 @@ function checkProps(object, props) {
 	return keys.every(key => checkKey(object, key, props[key]));
 }
 
+/**
+ * checks if the specified value is an array
+ * also checks if the array is not empty
+ * also checks if every item in the array is of the specified type
+ * @param  {Array}  array    - object that is expected to be an array
+ * @param  {string} type     - the type that every item in the array is expected to be
+ * @param  {boolean} [notEmpty] - whether the function should check if the array is empty or not
+ * @return {boolean}         - true if all the checks pass, else false
+ */
+function checkArray(array, type, notEmpty) {
+	if (!Array.isArray(array)) {
+		return false;
+	}
+	if (notEmpty && !array.length) {
+		return false;
+	}
+	return type ? array.every(item => typeof item === type) : true;
+}
+
 const check = {
 	key: checkKey,
 	props: checkProps,
+	array: checkArray,
 };
 
 module.exports = check;
