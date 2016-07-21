@@ -31,10 +31,13 @@ function checkProps(object, props) {
  * also checks if every item in the array is of the specified type
  * @param  {Array}  array    - object that is expected to be an array
  * @param  {string} type     - the type that every item in the array is expected to be
- * @param  {boolean} [notEmpty] - whether the function should check if the array is empty or not
+ * @param  {boolean} [notEmpty] - (optional) whether the function should check if the array is empty or not, default is true
  * @return {boolean}         - true if all the checks pass, else false
  */
 function checkArray(array, type, notEmpty) {
+	if (typeof notEmpty === 'undefined') {
+		notEmpty = true;
+	}
 	if (!Array.isArray(array)) {
 		return false;
 	}
