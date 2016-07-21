@@ -40,3 +40,27 @@ actual = check.props({foo: 'bar', bar: 0}, {foo: 'string', bar: 'number'});
 expected = true;
 
 assert.equal(actual, expected, 'check.props should return true if all of the keys are of the specified type');
+
+// check.array should return false if the value is not an array
+actual = check.array('string');
+expected = false;
+
+assert.equal(actual, expected, 'check.array should return false if the value is not an array');
+
+// check.array should return false if notEmpty is true and the array is empty
+actual = check.array([]);
+expected = false;
+
+assert.equal(actual, expected, 'check.array should return false if notEmpty is true and the array is empty');
+
+// check.array should return false if any value in the array is not of the specified type
+actual = check.array(['a', 'b', 2, 'c'], 'string');
+expected = false;
+
+assert.equal(actual, expected, 'check.array should return false if any value in the array is not of the specified type');
+
+// check.array should return true if all checks are valid
+actual = check.array([1, 2, 3, 4], 'number');
+expected = true;
+
+assert.equal(actual, expected, 'check.array should return true if all checks are valid');
